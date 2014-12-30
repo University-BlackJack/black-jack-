@@ -303,7 +303,7 @@ public class hit extends JPanel  {
 		lblNewLabel.setIcon(new ImageIcon(img3));
 		add(lblNewLabel);
 		
-		JLabel lblDelerScore = new JLabel("deler Score ");
+		JLabel lblDelerScore = new JLabel("Dealer Score ");
 		lblDelerScore.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDelerScore.setForeground(Color.BLUE);
 		lblDelerScore.setBounds(340, 24, 129, 20);
@@ -316,7 +316,7 @@ public class hit extends JPanel  {
 		add(textField_score_deler);
 		textField_score_deler.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("New Game");
+		JButton btnNewButton_1 = new JButton("New Hand");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			//	guiautoHit(label1,label2);
