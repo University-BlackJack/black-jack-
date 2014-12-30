@@ -12,7 +12,7 @@ public class BlackJack {
 		dealer.startHand(hand_round);		
 	}
 
-/////new game /////////////////////////////////////
+/////new game ///////////////////////////////////////////
 	public BlackJack() {
 		super();
 		 player = new Player("Max");
