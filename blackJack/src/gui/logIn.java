@@ -2,35 +2,27 @@ package gui;
 
 
 
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.StatementImpl;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class logIn extends JPanel {
 	private JTextField textField_userName;
@@ -39,9 +31,9 @@ public class logIn extends JPanel {
 	private PreparedStatement stmt = null;
 	private boolean flag_null=false; //null string username or password
 	private boolean flag_login=false; 
-	private String UserName_server; 
+	public  static String UserName_server; 
 	private String Password_server;
-	private int Score_server; 
+	public  static int Score_server; 
 	public logIn() {
 		setLayout(null);
 	
@@ -76,9 +68,10 @@ public class logIn extends JPanel {
 		add(lblLogin);
 		JButton btnEnter = new JButton("enter");
 		btnEnter.addActionListener(new ActionListener() {
+			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent arg0) {
-				
-				 String username = null;
+				sql_con con = null;
+				String username = null;
 				 username=textField_userName.getText();
 				 char [] pass =  passwordField.getPassword();
 				 String password = null;
@@ -91,42 +84,11 @@ public class logIn extends JPanel {
 				 {
 					 JOptionPane.showMessageDialog(null,"Enter User Name and Password.");
 				 }
-				String sql = "select UserName,Password,Score FROM User;";
-				try {
-					connect = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/BlackJack","root","123456");
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if(connect==null)
-					JOptionPane.showMessageDialog(null,"Connect lost ");
-				try {
-					stmt = (PreparedStatement) connect.prepareStatement(sql);
-					ResultSet rs = stmt.executeQuery(sql);
-					if(flag_null){
-						while(rs.next()){
-					         //Retrieve by column name
-					         int score_local = rs.getInt("Score");
-					         String username_local = rs.getString("UserName");
-					         String password_local = rs.getString("Password");
-					         if(username_local.equals(username)&&password_local.equals(password)){
-					        	 flag_login=true;
-					        	 UserName_server = new String(username_local);
-					        	 Password_server = new String(password_local);
-					        	 Score_server = score_local;
-					        	 break;
-					         }
-					      }
-					}
-					if(flag_null&&!flag_login){
-						JOptionPane.showMessageDialog(null,"Your user name or password is not in a database");
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if(flag_null&&flag_login)
+				 con.Check_UserName_Pass(username,password);
+				if(flag_null)
 				{
+					//mainvvd.engine.Game.player.name=UserName_server;
+					//mainvvd.engine.Game.player.score=Score_server;
 					Score Score= new Score();
 					MainScreen.card.add("Score", Score);
 					MainScreen.cardLayot.show(MainScreen.card, "Score");
