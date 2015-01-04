@@ -27,12 +27,8 @@ import javax.swing.SwingConstants;
 public class logIn extends JPanel {
 	private JTextField textField_userName;
 	private JPasswordField passwordField;
-	private Connection connect = null; // connect to mysql-server
-	private PreparedStatement stmt = null;
 	private boolean flag_null=false; //null string username or password
-	private boolean flag_login=false; 
 	public  static String UserName_server; 
-	private String Password_server;
 	public  static int Score_server; 
 	public logIn() {
 		setLayout(null);
@@ -70,13 +66,12 @@ public class logIn extends JPanel {
 		btnEnter.addActionListener(new ActionListener() {
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent arg0) {
-				sql_con con = null;
 				String username = null;
 				 username=textField_userName.getText();
 				 char [] pass =  passwordField.getPassword();
 				 String password = null;
 				 password = new String(pass);
-				 
+				 sql_con con = new sql_con();
 				 if(!username.equals("")&&!password.equals("")){
 					 flag_null=true;
 				 }
@@ -84,11 +79,10 @@ public class logIn extends JPanel {
 				 {
 					 JOptionPane.showMessageDialog(null,"Enter User Name and Password.");
 				 }
-				 con.Check_UserName_Pass(username,password);
-				if(flag_null)
+				if(flag_null&&con.Check_UserName_Pass(username,password))
 				{
-					//mainvvd.engine.Game.player.name=UserName_server;
-					//mainvvd.engine.Game.player.score=Score_server;
+					mainvvd.engine.Game.player.name=con.getUserName_server();
+					mainvvd.engine.Game.player.score=con.getScore();
 					Score Score= new Score();
 					MainScreen.card.add("Score", Score);
 					MainScreen.cardLayot.show(MainScreen.card, "Score");

@@ -121,6 +121,7 @@ public class hit extends JPanel  {
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				sql_con con = new sql_con();
 				if(to2== 1){
 					return;
 				}
@@ -183,7 +184,8 @@ public class hit extends JPanel  {
 				    	
 				    }
 				  if(mainvvd.engine.Game.dealer.getSum_cards()>21){
-				    	
+					  int score = mainvvd.engine.Game.player.score+(mainvvd.engine.Game.player.scoreBet*2);
+					  con.UpDate_Score(mainvvd.engine.Game.player.name, score);
 				    	 JOptionPane.showMessageDialog(null,"the deler is busted the the player is won"+mainvvd.engine.Game.player.scoreBet*2+" score");
 				    	 mainvvd.engine.Game.player.score+=(mainvvd.engine.Game.player.scoreBet*2);
 				    	 to2=1;
@@ -192,11 +194,15 @@ public class hit extends JPanel  {
 				    }
 				  
 						if(mainvvd.engine.Game.dealer.getSum_cards()>mainvvd.engine.Game.player.getSum_cards()){
+							 int score = mainvvd.engine.Game.player.score-mainvvd.engine.Game.player.scoreBet;
+							  con.UpDate_Score(mainvvd.engine.Game.player.name, score);
 							 JOptionPane.showMessageDialog(null,"the  deler win the player lose");
 							 mainvvd.engine.Game.player.score-=mainvvd.engine.Game.player.scoreBet;
 							 
 						}
 						else{
+							 int score = mainvvd.engine.Game.player.score+(mainvvd.engine.Game.player.scoreBet*2);
+							  con.UpDate_Score(mainvvd.engine.Game.player.name, score);
 							 JOptionPane.showMessageDialog(null,"you player  win  you win "+mainvvd.engine.Game.player.scoreBet*2);
 							 mainvvd.engine.Game.player.score+=(mainvvd.engine.Game.player.scoreBet*2);
 						}
@@ -223,7 +229,7 @@ public class hit extends JPanel  {
 					
 				}
 				if(mainvvd.engine.Game.player.getCurrect_cards()==2){
-					
+					sql_con con = new sql_con();
 					String s =new String();
 					s=mainvvd.engine.Game.player.Hit();
 				System.out.printf( "\n %s",s); 
@@ -236,6 +242,8 @@ public class hit extends JPanel  {
 					  if(mainvvd.engine.Game.player.IsBusted()==true){
 							 JOptionPane.showMessageDialog(null,"Busted ..You Lost This Hand , Start A New Hand !!!  ");
 							 mainvvd.engine.Game.player.stand();
+							 int score = mainvvd.engine.Game.player.score-mainvvd.engine.Game.player.scoreBet;
+							  con.UpDate_Score(mainvvd.engine.Game.player.name, score);
 							 mainvvd.engine.Game.player.score-=mainvvd.engine.Game.player.scoreBet;
 
 							 to2=1;

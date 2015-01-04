@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 public class GenericPlayer {
 		public Card[] p_cards;
 		public int sum_cards;
-		private String name;
+		public String name;
 		private int currect_cards;
 		public int ace_value=0;
 		public int score;
