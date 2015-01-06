@@ -23,6 +23,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class logIn extends JPanel {
 	private JTextField textField_userName;
@@ -30,39 +34,56 @@ public class logIn extends JPanel {
 	private boolean flag_null=false; //null string username or password
 	public  static String UserName_server; 
 	public  static int Score_server; 
-	public logIn() {
-		setLayout(null);
 	
-		JLabel lblNewLabel = new JLabel("userName");
-		lblNewLabel.setForeground(Color.BLUE);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(46, 93, 124, 50);
-		add(lblNewLabel);
+	public logIn() {
+		 Image  img3 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();
 		
-		textField_userName = new JTextField();
-		textField_userName.setBounds(239, 112, 86, 20);
+		setLayout(null);
+		
+		textField_userName = new JTextField(){
+			@Override public void setBorder(Border border) {
+		        // No!
+		    }
+		};
+		textField_userName.setBorder(null);
+		textField_userName.setFont(new Font("Showcard Gothic", textField_userName.getFont().getStyle(), textField_userName.getFont().getSize() + 9));
+		textField_userName.setForeground(Color.WHITE);
+		textField_userName.setOpaque(false);
+		 
+		textField_userName.setBounds(126, 124, 226, 45);
 		add(textField_userName);
 		textField_userName.setColumns(10);
 		
-		JLabel lblPaswword = new JLabel("paswword");
-		lblPaswword.setForeground(Color.BLUE);
-		lblPaswword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPaswword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPaswword.setBounds(46, 210, 124, 50);
-		add(lblPaswword);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(239, 225, 86, 20);
+		passwordField = new JPasswordField(){
+			@Override public void setBorder(Border border) {
+		        // No!
+		    }
+		};
+		passwordField.setBorder(null);
+		passwordField.setForeground(Color.WHITE);
+		passwordField.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		passwordField.setOpaque(false);
+		passwordField.setBounds(126, 186, 226, 45);
 		add(passwordField);
-		
-		JLabel lblLogin = new JLabel("logIn");
-		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setForeground(new Color(0, 0, 0));
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblLogin.setBounds(46, 36, 210, 46);
-		add(lblLogin);
-		JButton btnEnter = new JButton("enter");
+		JButton btnSignup = new JButton("");
+		btnSignup.setOpaque(false);
+		btnSignup.setContentAreaFilled(false);
+		btnSignup.setBorderPainted(false);
+		btnSignup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				    signUp signUp= new signUp();
+	                
+					MainScreen.card.add("signUp", signUp);
+					MainScreen.cardLayot.show(MainScreen.card, "signUp");
+			}
+		});
+		btnSignup.setBounds(220, 318, 110, 30);
+		add(btnSignup);
+		JButton btnEnter = new JButton("");
+	
+		btnEnter.setOpaque(false);
+		btnEnter.setContentAreaFilled(false);
+		btnEnter.setBorderPainted(false);
 		btnEnter.addActionListener(new ActionListener() {
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent arg0) {
@@ -90,30 +111,131 @@ public class logIn extends JPanel {
 				
 			}
 		});
-		btnEnter.setBounds(47, 305, 138, 23);
+		btnEnter.setBounds(77, 261, 281, 48);
 		add(btnEnter);
-		JButton btnSignup = new JButton("signUP");
-		btnSignup.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				    signUp signUp= new signUp();
-	                
-					MainScreen.card.add("signUp", signUp);
-					MainScreen.cardLayot.show(MainScreen.card, "signUp");
+		Image  img = new ImageIcon(this.getClass().getResource("/black_1.jpg")).getImage();
+		
+
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		final BufferedImage newImage = resizeImage(img,Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
+		final JLabel lblNewLabel4 = new JLabel("");
+		lblNewLabel4.setBounds(20, 20, 523, 414);
+		lblNewLabel4.setIcon(new ImageIcon(img3));
+		add(lblNewLabel4);
+		textField_userName.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				 JOptionPane.showMessageDialog(null,"Player Busted  !!,Start a New Hand ");
+				
+			
 			}
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				Image img4 =  img4 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();;
+				if( (textField_userName.getText().length()!=0 ) && ( passwordField.getText().length()!=0 ) ){
+				   img4 = new ImageIcon(this.getClass().getResource("/login3.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()!=0) &&(passwordField.getText().length()==0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login2.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()==0) &&(passwordField.getText().length()!=0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login4.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()==0) &&(passwordField.getText().length()==0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();
+				}
+					
+					lblNewLabel4.setIcon(new ImageIcon(img4));
+					lblNewLabel4.repaint();
+				
+				
+					
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				
+				Image img4 =  img4 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();;
+				if( (textField_userName.getText().length()!=0 ) && ( passwordField.getText().length()!=0 ) ){
+				   img4 = new ImageIcon(this.getClass().getResource("/login3.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()!=0) &&(passwordField.getText().length()==0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login2.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()==0) &&(passwordField.getText().length()!=0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login4.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()==0) &&(passwordField.getText().length()==0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();
+				}
+					
+					lblNewLabel4.setIcon(new ImageIcon(img4));
+					lblNewLabel4.repaint();
+			}
+			
 		});
-		btnSignup.setBounds(236, 305, 138, 23);
-		add(btnSignup);
+		passwordField.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				Image img4 =  img4 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();;
+				if( (textField_userName.getText().length()!=0 ) && ( passwordField.getText().length()!=0 ) ){
+				   img4 = new ImageIcon(this.getClass().getResource("/login3.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()!=0) &&(passwordField.getText().length()==0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login2.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()==0) &&(passwordField.getText().length()!=0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login4.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()==0) &&(passwordField.getText().length()==0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();
+				}
+					
+					lblNewLabel4.setIcon(new ImageIcon(img4));
+					lblNewLabel4.repaint();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				Image img4 =  img4 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();;
+				if( (textField_userName.getText().length()!=0 ) && ( passwordField.getText().length()!=0 ) ){
+				   img4 = new ImageIcon(this.getClass().getResource("/login3.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()!=0) &&(passwordField.getText().length()==0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login2.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()==0) &&(passwordField.getText().length()!=0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login4.png")).getImage();
+				}
+				else if( (textField_userName.getText().length()==0) &&(passwordField.getText().length()==0 )){
+					  img4 = new ImageIcon(this.getClass().getResource("/login.png")).getImage();
+				}
+					
+					lblNewLabel4.setIcon(new ImageIcon(img4));
+					lblNewLabel4.repaint();
+				
+			}
+			
+			
+		});
+		
 		
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(0, 0,Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 		add(lblNewLabel_1);
-		Image  img = new ImageIcon(this.getClass().getResource("/black_1.jpg")).getImage();
-		
-
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		final BufferedImage newImage = resizeImage(img,Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 		lblNewLabel_1.setIcon(new ImageIcon(newImage));
 		
 	

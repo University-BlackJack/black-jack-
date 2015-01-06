@@ -44,7 +44,7 @@ public class hit extends JPanel  {
 		JLabel lblScore = new JLabel("Score");
 		lblScore.setForeground(Color.WHITE);
 		lblScore.setFont(new Font("Poor Richard", lblScore.getFont().getStyle(), lblScore.getFont().getSize() + 10));
-		lblScore.setBounds(796, 573, 116, 39);
+		lblScore.setBounds(795, 665, 116, 39);
 		add(lblScore);
 		
 		textField = new JTextField();
@@ -53,14 +53,14 @@ public class hit extends JPanel  {
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("David", textField.getFont().getStyle(), textField.getFont().getSize() + 10));
 		textField.setBackground(Color.WHITE);
-		textField.setBounds(954, 576, 86, 39);
+		textField.setBounds(953, 668, 86, 39);
 		add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblPlayerName = new JLabel("Player Name ");
 		lblPlayerName.setForeground(Color.WHITE);
 		lblPlayerName.setFont(new Font("Poor Richard", lblPlayerName.getFont().getStyle(), lblPlayerName.getFont().getSize() + 10));
-		lblPlayerName.setBounds(796, 638, 116, 57);
+		lblPlayerName.setBounds(795, 730, 116, 57);
 		add(lblPlayerName);
 		
 		textField_1 = new JTextField();
@@ -69,7 +69,7 @@ public class hit extends JPanel  {
 		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_1.setFont(new Font("David", textField_1.getFont().getStyle(), textField_1.getFont().getSize() + 10));
 		textField_1.setBackground(Color.WHITE);
-		textField_1.setBounds(954, 650, 86, 39);
+		textField_1.setBounds(953, 742, 86, 39);
 		add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -80,25 +80,25 @@ public class hit extends JPanel  {
 		add(lblS);
 		final JLabel label3 = new JLabel("New label");
 		label3.setVisible(false);
-		label3.setBounds(540, 431, 100, 119);
+		label3.setBounds(539, 523, 100, 119);
 		add(label3);
-		
+
 		
 		
 		final JLabel label4 = new JLabel("New label");
 		label4.setVisible(false);
-		label4.setBounds(642, 431, 100, 119);
+		label4.setBounds(641, 523, 100, 119);
 		add(label4);
 		
 		final JLabel label5 = new JLabel("New label");
 		label5.setVisible(false);
-		label5.setBounds(740, 431, 100, 119);
+		label5.setBounds(739, 523, 100, 119);
 		add(label5);
 	
 		
 		final JLabel label1 = new JLabel("player_first_card");
 		label1.setVisible(false);
-		label1.setBounds(340, 431, 100, 119);
+		label1.setBounds(339, 523, 100, 119);
 		add(label1);
 		//Card card1 = new Card();
 	
@@ -113,7 +113,7 @@ public class hit extends JPanel  {
 		
 		final JLabel label2 = new JLabel("player_first_card");
 		label2.setVisible(false);
-		label2.setBounds(440, 431, 100, 119);
+		label2.setBounds(439, 523, 100, 119);
 		add(label2);
 		
 		final JLabel lblLabeCardThreeDeler = new JLabel("label3");
@@ -163,6 +163,7 @@ public class hit extends JPanel  {
 				s=mainvvd.engine.Game.dealer.Hit();
 				
 //			System.out.printf( "\n %s",s); 
+	
 				lblDelerSecondCard.setVisible(true);
 				Image  img2 = new ImageIcon(this.getClass().getResource(s)).getImage();
 			//	Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -246,13 +247,15 @@ public class hit extends JPanel  {
 					
 					String s =new String();
 					s=mainvvd.engine.Game.player.Hit();
-				System.out.printf( "\n %s",s); 
+				//System.out.printf( "\n %s",s); 
 					label3.setVisible(true);
 					Image  img2 = new ImageIcon(this.getClass().getResource(s)).getImage();
 					Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 					final BufferedImage newImage = resizeImage(img2,100,119);
 					label3.setIcon(new ImageIcon(newImage));
 					  hit.textField.setText("" + mainvvd.engine.Game.player.getSum_cards());
+		
+					
 					  if(mainvvd.engine.Game.player.IsBusted()==true){
 						  int score = mainvvd.engine.Game.player.score-mainvvd.engine.Game.player.scoreBet;
 						  con.UpDate_Score(mainvvd.engine.Game.player.name, score);
@@ -318,7 +321,7 @@ public class hit extends JPanel  {
 		add(btnHit);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(483, 570, 270, 170);
+		lblNewLabel.setBounds(482, 662, 270, 170);
 		Image  img3 = new ImageIcon(this.getClass().getResource("/player.jpg")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(img3));
 		add(lblNewLabel);
@@ -348,7 +351,7 @@ public class hit extends JPanel  {
 					  return;
 				}
 				
-				  JOptionPane.showMessageDialog(null," A new Bit to game   ");
+				//  JOptionPane.showMessageDialog(null," A new Bit to game   ");
 
 				label1.setVisible(false);
 				label2.setVisible(false);
